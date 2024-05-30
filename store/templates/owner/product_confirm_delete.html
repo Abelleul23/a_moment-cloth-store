@@ -1,0 +1,71 @@
+{% extends 'owner/base.html' %}
+
+{% block title %}Delete Product{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .delete-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .delete-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .delete-container p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .delete-container form {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .delete-container .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .delete-container .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .delete-container .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .delete-container .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+    }
+
+    .delete-container .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="delete-container">
+    <h1>Delete Product</h1>
+    <p>Are you sure you want to delete the product "{{ product.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm</button>
+        <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

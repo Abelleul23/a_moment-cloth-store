@@ -1,0 +1,60 @@
+{% extends 'owner/base.html' %}
+
+{% block title %}Owner Dashboard{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .dashboard-container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 40px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-container h1 {
+        font-size: 32px;
+        margin-bottom: 30px;
+        color: #343a40;
+    }
+
+    .dashboard-container .nav-link {
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 8px;
+        color: #343a40;  /* Explicitly set text color */
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dashboard-container .nav-link:hover {
+        background-color: #007bff;
+        color: #fff !important;
+    }
+
+    .dashboard-container .nav-link i {
+        margin-right: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Owner Home</h1>
+    <div class="list-group">
+        <a href="{% url 'product_list' %}" class="list-group-item list-group-item-action nav-link">
+            <i class="fas fa-box"></i> Manage Products
+        </a>
+        <a href="{% url 'category_list' %}" class="list-group-item list-group-item-action nav-link">
+            <i class="fas fa-list-alt"></i> Manage Categories
+        </a>
+        <a href="{% url 'cloth_list' %}" class="list-group-item list-group-item-action nav-link">
+            <i class="fas fa-tshirt"></i> Manage Cloths
+        </a>
+        <a href="{% url 'sales_report' %}" class="list-group-item list-group-item-action nav-link">
+            <i class="fas fa-chart-line"></i> View Sales Report
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'owner/base.html' %}
+
+{% block title %}{% if form.instance.pk %}Update Category{% else %}Create Category{% endif %}{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .category-form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-form-container h1 {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .category-form-container .form-group {
+        margin-bottom: 20px;
+    }
+
+    .category-form-container label {
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 8px;
+    }
+
+    .category-form-container input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+    }
+
+    .category-form-container button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .category-form-container button:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="category-form-container">
+    <h1>{% if form.instance.pk %}Update Category{% else %}Create Category{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

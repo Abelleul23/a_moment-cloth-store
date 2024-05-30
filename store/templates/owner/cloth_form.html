@@ -1,0 +1,88 @@
+{% extends 'owner/base.html' %}
+
+{% block title %}{% if form.instance.pk %}Update Cloth{% else %}Create Cloth{% endif %}{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .cloth-form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .cloth-form-container h1 {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .cloth-form-container form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 20px;
+    }
+
+    .cloth-form-container .form-group {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+        grid-gap: 16px;
+    }
+
+    .cloth-form-container label {
+        font-size: 16px;
+        font-weight: 500;
+        justify-self: end;
+    }
+
+    .cloth-form-container input,
+    .cloth-form-container textarea {
+        padding: 12px 16px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+    }
+
+    .cloth-form-container input:focus,
+    .cloth-form-container textarea:focus {
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .cloth-form-container button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .cloth-form-container button:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="cloth-form-container">
+    <h1>{% if form.instance.pk %}Update Cloth{% else %}Create Cloth{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

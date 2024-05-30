@@ -1,0 +1,90 @@
+{% extends 'owner/base.html' %}
+
+{% block title %}Category List{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .category-list-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-list-container h1 {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .category-list-container table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+
+    .category-list-container th,
+    .category-list-container td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #ced4da;
+    }
+
+    .category-list-container th {
+        background-color: #f8f9fa;
+        font-weight: 500;
+    }
+
+    .category-list-container a {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .category-list-container a:hover {
+        background-color: #0056b3;
+    }
+
+    .category-list-container .create-btn {
+        display: block;
+        margin-top: 20px;
+        text-align: right;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="category-list-container">
+    <h1>Category List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a href="{% url 'category_update' category.slug %}">Edit</a>
+                    <a href="{% url 'category_delete' category.slug %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="create-btn">
+        <a href="{% url 'category_create' %}">Create Category</a>
+    </div>
+</div>
+{% endblock %}

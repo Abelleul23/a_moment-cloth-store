@@ -1,0 +1,74 @@
+{% extends 'owner/base.html' %}
+
+{% block title %}Delete Cloth{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .delete-cloth-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .delete-cloth-container h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .delete-cloth-container p {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .delete-cloth-container form {
+        display: flex;
+        justify-content: flex-end;
+        gap: 16px;
+    }
+
+    .delete-cloth-container button,
+    .delete-cloth-container a {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .delete-cloth-container button {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .delete-cloth-container button:hover {
+        background-color: #c82333;
+    }
+
+    .delete-cloth-container a {
+        background-color: #6c757d;
+        color: #fff;
+    }
+
+    .delete-cloth-container a:hover {
+        background-color: #5a6268;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="delete-cloth-container">
+    <h1>Delete Cloth</h1>
+    <p>Are you sure you want to delete the cloth "{{ cloth.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+        <a href="{% url 'cloth_list' %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'owner/base.html' %}
+
+{% block title %}Cloth List{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .cloth-list-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px;
+    }
+
+    .cloth-list-container h1 {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .cloth-list-table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .cloth-list-table th,
+    .cloth-list-table td {
+        padding: 16px;
+        text-align: left;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .cloth-list-table th {
+        background-color: #f8f9fa;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .cloth-list-table td {
+        font-size: 16px;
+    }
+
+    .cloth-list-table tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .cloth-list-table a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .cloth-list-table a:hover {
+        color: #0056b3;
+    }
+
+    .create-cloth-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        margin-top: 30px;
+    }
+
+    .create-cloth-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .cloth-list-table th.product-count,
+    .cloth-list-table td.product-count {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="cloth-list-container">
+    <h1>Cloth List</h1>
+    <table class="cloth-list-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th class="product-count">Product Count</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cloth in cloths %}
+            <tr>
+                <td>{{ cloth.name }}</td>
+                <td>{{ cloth.description }}</td>
+                <td>
+                    {% for category in cloth.categories.all %}
+                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        -
+                    {% endfor %}
+                </td>
+                <td class="product-count">{{ cloth.product_count }}</td>
+                <td>
+                    <a href="{% url 'cloth_update' cloth.slug %}">Edit</a>
+                    <a href="{% url 'cloth_delete' cloth.slug %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'cloth_create' %}" class="create-cloth-btn">Create Cloth</a>
+</div>
+{% endblock %}
